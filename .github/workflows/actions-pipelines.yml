@@ -38,10 +38,10 @@ jobs:
       uses: Azure/k8s-deploy@v4
       with:
         namespace: ${{ secrets.AKS_NAMESPACE }}
-        manifests: k8s/mongo/*.yml
+        manifests: k8s/mongo
 
     - name: Deploy Node to AKS
       uses: Azure/k8s-deploy@v4
       with:
         namespace: ${{ secrets.AKS_NAMESPACE }}
-        manifests: k8s/node/*.yml
+        manifests: k8s/node
