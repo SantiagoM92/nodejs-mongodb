@@ -1,0 +1,29 @@
+name: Build, Push and Aks Deploy
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build_and_push_images:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Docker Login
+      uses: docker/login-action@v3.0.0
+      with:
+        registry: ${{ secrets.DH_URL }}
+        username: ${{ secrets.DH_USERNAME }}
+        password: ${{ secrets.DH_PASS }}
+        logout: true
+    
+    - name: Build and push Docker Node Image
+      uses: docker/build-push-action@v5.0.0
+      with:
+        file: ./dockerfile
+        push: true
+        tags: ${{ secrets.DH_URL }}/node-app:latest
