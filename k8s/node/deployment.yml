@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-ms
+  labels:
+    app: nodejs-ms
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodejs-ms
+  template:
+    metadata:
+      labels:
+        app: nodejs-ms
+    spec:
+      containers:
+        - name: nodejs-ms
+          image: jsmu/node-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGO_HOST
+              value: "mongo-ms-svc"
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_USERNAME
+              value: "unirmongo"
+            - name: MONGO_PASSWORD
+              value: "unirm0ng0"
+            - name: MONGO_DATABASE
+              value: mongo
