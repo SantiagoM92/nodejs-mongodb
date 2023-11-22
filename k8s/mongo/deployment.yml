@@ -27,3 +27,19 @@ spec:
               value: "unirm0ng0"
             - name: MONGO_INITDB_DATABASE
               value: "mongo"
+          livenessProbe:
+            tcpSocket:
+              port: 27017
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 27017
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              memory: 512Mi
