@@ -26,4 +26,4 @@ jobs:
       with:
         file: ./dockerfile
         push: true
-        tags: ${{ secrets.DH_URL }}/node-app:latest
+        tags: ${{ secrets.DH_USERNAME}}/node-app:latest
