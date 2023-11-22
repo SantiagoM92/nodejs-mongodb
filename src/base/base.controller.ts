@@ -32,7 +32,7 @@ export class BaseController<T extends BaseEntity> {
   }
 
   @Put(':id')
-  async update(@Res() res, @Query('id') id, @Body() t: T) {
+  async update(@Res() res, @Param('id') id, @Body() t: T) {
       const entity = await this.baseService.update(t);
       if (!entity) {
         throw new NotFoundException('Entity does not exist!');
@@ -44,7 +44,7 @@ export class BaseController<T extends BaseEntity> {
   }
 
   @Delete(':id')
-  async deleteCustomer(@Res() res, @Query('id') id) {
+  async deleteCustomer(@Res() res, @Param('id') id) {
       const entity = await this.baseService.delete(id);
       if (!entity) {
         throw new NotFoundException('Entity does not exist');
