@@ -14,12 +14,19 @@ spec:
       labels:
         app: mongo-ms
     spec:
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-pvc
       containers:
         - name: mongo-ms
           image: mongo:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 27017
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo-data
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: "unirmongo"
